@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulldog Manufacturing - Digital Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Commissioner:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --deep-teal: #1A4D4D;
+            --terracotta: #D67C5C;
+            --sage: #8FA89E;
+            --charcoal: #2C2C2C;
+            --gold: #C9A961;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        nav {
+            background: var(--deep-teal);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--terracotta);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--terracotta);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--terracotta);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            opacity: 0.85;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--sage);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--terracotta);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+        }
+
+        /* Achievements Section */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--deep-teal);
+            margin: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--terracotta);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .achievement-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--terracotta);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .achievement-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .achievement-description {
+            color: var(--charcoal);
+            opacity: 0.85;
+            line-height: 1.8;
+        }
+
+        /* Responsibilities */
+        .responsibilities {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .responsibilities h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--deep-teal);
+            margin-bottom: 2rem;
+        }
+
+        .responsibilities-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .responsibilities-list li {
+            padding: 1.5rem;
+            background: var(--cream);
+            border-radius: 12px;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .responsibilities-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 1.5rem;
+            color: var(--terracotta);
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--charcoal);
+            opacity: 0.6;
+            font-size: 0.95rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--deep-teal);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid,
+            .achievements-grid,
+            .responsibilities-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Your Sister's Name</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="experience.html">Work Experience</a></li>
+                <li><a href="bulldog.html" class="active">Bulldog Manufacturing</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="sports.html">Sports</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Bulldog Manufacturing</h1>
+            <p class="page-subtitle">8+ Years of Excellence | 2016 - Present</p>
+            <p class="intro-text">
+                My journey at Bulldog Manufacturing began in 2016 as a Production Associate. Through dedication, 
+                continuous learning, and a commitment to excellence, I've advanced through multiple roles to my 
+                current position as Operations Manager. This progression reflects my deep understanding of 
+                manufacturing operations and proven leadership capabilities.
+            </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">8+</div>
+                <div class="stat-label">Years with Company</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">35%</div>
+                <div class="stat-label">Efficiency Increase</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">25+</div>
+                <div class="stat-label">Team Members Led</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50%</div>
+                <div class="stat-label">Safety Improvement</div>
+            </div>
+        </div>
+
+        <!-- Key Achievements -->
+        <h2 class="section-title">Key Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">🏆</div>
+                <h3 class="achievement-title">Process Optimization</h3>
+                <p class="achievement-description">
+                    Led comprehensive process improvement initiative that increased production efficiency by 35% 
+                    while maintaining quality standards. Implemented lean manufacturing principles across all production lines.
+                </p>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">📈</div>
+                <h3 class="achievement-title">Career Advancement</h3>
+                <p class="achievement-description">
+                    Promoted three times within the organization: from Production Associate to Production Supervisor 
+                    to Operations Manager, demonstrating consistent performance and leadership growth.
+                </p>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">🛡️</div>
+                <h3 class="achievement-title">Safety Excellence</h3>
+                <p class="achievement-description">
+                    Championed new safety protocols and training programs that reduced workplace incidents by 50%, 
+                    creating a safer environment for all team members.
+                </p>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">👥</div>
+                <h3 class="achievement-title">Team Leadership</h3>
+                <p class="achievement-description">
+                    Successfully manage and mentor a diverse team of 25+ employees across multiple shifts, 
+                    fostering a culture of collaboration and continuous improvement.
+                </p>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">⏰</div>
+                <h3 class="achievement-title">On-Time Delivery</h3>
+                <p class="achievement-description">
+                    Maintained 98% on-time delivery rate as Production Supervisor, ensuring customer satisfaction 
+                    and strengthening client relationships.
+                </p>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">♻️</div>
+                <h3 class="achievement-title">Waste Reduction</h3>
+                <p class="achievement-description">
+                    Implemented quality control improvements that significantly reduced material waste and 
+                    improved overall product quality metrics.
+                </p>
+            </div>
+        </div>
+
+        <!-- Current Responsibilities -->
+        <div class="responsibilities">
+            <h3>Current Responsibilities as Operations Manager</h3>
+            <ul class="responsibilities-list">
+                <li>Oversee daily manufacturing operations and production scheduling</li>
+                <li>Manage cross-functional teams including production, quality, and maintenance</li>
+                <li>Develop and implement process improvement initiatives</li>
+                <li>Monitor key performance indicators and production metrics</li>
+                <li>Ensure compliance with safety regulations and quality standards</li>
+                <li>Coordinate with procurement for materials and inventory management</li>
+                <li>Lead training and development programs for production staff</li>
+                <li>Collaborate with leadership on strategic planning and budgeting</li>
+                <li>Drive continuous improvement culture across all departments</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>© 2026 Sarah Smith. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Experience - Digital Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Commissioner:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --deep-teal: #001f3f;
+            --terracotta: #D67C5C;
+            --sage: #8FA89E;
+            --charcoal: #2C2C2C;
+            --gold: #C9A961;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        nav {
+            background: var(--deep-teal);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--terracotta);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--terracotta);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--terracotta);
+            opacity: 0.9;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--terracotta), var(--sage));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--terracotta);
+            border-radius: 50%;
+            border: 4px solid var(--cream);
+            z-index: 2;
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: var(--terracotta);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--deep-teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            font-size: 1.2rem;
+            color: var(--sage);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--charcoal);
+            opacity: 0.85;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-highlights {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .timeline-highlights li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--terracotta);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--charcoal);
+            opacity: 0.6;
+            font-size: 0.95rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--deep-teal);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                text-align: left !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Lydia Wrest</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="experience.html" class="active">Work Experience</a></li>
+                <li><a href="bulldog.html">Bulldog Manufacturing</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="sports.html">Sports</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Work Experience</h1>
+            <p class="page-subtitle">About where I have worked</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2025 - Present</span>
+                    <h3 class="timeline-title">Design and Consumer Products Lead</h3>
+                    <p class="timeline-company">Bulldog Manufacturing</p>
+                    <p class="timeline-description">
+                        Leading daily operations and process improvements for a high-volume manufacturing facility. 
+                        Responsible for production scheduling, quality control, and team management.
+                    </p>
+                    <ul class="timeline-highlights">
+                        <li>Increased production efficiency by 35% through process optimization</li>
+                        <li>Managed team of 25+ employees across multiple shifts</li>
+                        <li>Reduced waste and improved quality control metrics</li>
+                        <li>Implemented new safety protocols reducing incidents by 50%</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2024 - present</span>
+                    <h3 class="timeline-title">Veterans Home Volunteer</h3>
+                    <p class="timeline-company">NY State Veterans Home at Batavia</p>
+                    <p class="timeline-description">
+                        Supervised production floor operations and coordinated with quality assurance teams 
+                        to ensure manufacturing standards were met consistently.
+                    </p>
+                    <ul class="timeline-highlights">
+                        <li>Promoted from Production Associate after 2 years</li>
+                        <li>Led shift team of 12-15 production workers</li>
+                        <li>Achieved 98% on-time delivery rate</li>
+                        <li>Trained new employees on equipment and safety procedures</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2023 - present</span>
+                    <h3 class="timeline-title">Mcdonalds Crew Member</h3>
+                    <p class="timeline-company">Mcdonalds - Alden, NY</p>
+                    <p class="timeline-description">
+                        Worked on a production team helping keep orders moving. Focused on safety, consistency, and quality while learning how manufacturing runs day to day. 
+                    </p>
+                    <ul class="timeline-highlights">
+                        <li>Worked in a basic production equipment and followed standard work instructions to keep the line running smoothly.</li>
+                        <li>Completed routine quality checks (labels, measurements, defects) and reported issues quickly to prevent waste or further issues</li>
+                        <li>Worked with manager demands to make sure the store was efficently kept up to demands</li>
+                        <li>Worked closely with teammates to meet daily goals and helped with packing, sorting, staging, and covering stations when needed.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2022 - present</span>
+                    <h3 class="timeline-title">Vacation Bible School Volunteer</h3>
+                    <p class="timeline-company">St. John the Baptist - Alden, NY</p>
+                    <p class="timeline-description">
+                        Managed inventory, shipping, and receiving operations in a fast-paced warehouse environment.
+                    </p>
+                    <ul class="timeline-highlights">
+                        <li>Processed 100+ orders daily with 99% accuracy</li>
+                        <li>Operated forklifts and warehouse equipment</li>
+                        <li>Collaborated with logistics team on efficiency improvements</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 Lydia Wrest. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications - Digital Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Commissioner:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --deep-teal: #1A4D4D;
+            --terracotta: #D67C5C;
+            --sage: #8FA89E;
+            --charcoal: #2C2C2C;
+            --gold: #C9A961;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        nav {
+            background: var(--deep-teal);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--terracotta);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--terracotta);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--terracotta);
+            opacity: 0.9;
+        }
+
+        /* Certification Cards */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .cert-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .cert-header {
+            background: linear-gradient(135deg, var(--deep-teal), var(--sage));
+            padding: 2.5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .cert-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-issuer {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .cert-body {
+            padding: 2rem;
+        }
+
+        .cert-date {
+            display: inline-block;
+            background: var(--cream);
+            color: var(--terracotta);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cert-description {
+            color: var(--charcoal);
+            opacity: 0.85;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .cert-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: var(--sage);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Education Section */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--deep-teal);
+            margin: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--terracotta);
+        }
+
+        .education-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin: 2rem 0;
+            border-left: 5px solid var(--terracotta);
+        }
+
+        .education-degree {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--deep-teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-school {
+            font-size: 1.3rem;
+            color: var(--sage);
+            margin-bottom: 1rem;
+        }
+
+        .education-year {
+            color: var(--terracotta);
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--charcoal);
+            opacity: 0.6;
+            font-size: 0.95rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--deep-teal);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Your Sister's Name</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="experience.html">Work Experience</a></li>
+                <li><a href="bulldog.html">Bulldog Manufacturing</a></li>
+                <li><a href="certifications.html" class="active">Certifications</a></li>
+                <li><a href="sports.html">Sports</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Certifications & Education</h1>
+            <p class="page-subtitle">Continuous Learning & Professional Development</p>
+        </div>
+
+        <!-- Professional Certifications -->
+        <div class="cert-grid">
+            <div class="cert-card">
+                <div class="cert-header">
+                    <div class="cert-icon">🏭</div>
+                    <h3 class="cert-name">Lean Six Sigma Green Belt</h3>
+                    <p class="cert-issuer">American Society for Quality (ASQ)</p>
+                </div>
+                <div class="cert-body">
+                    <span class="cert-date">Earned: 2022</span>
+                    <p class="cert-description">
+                        Advanced certification in process improvement methodologies, focusing on reducing waste, 
+                        improving quality, and increasing operational efficiency in manufacturing environments.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Process Improvement</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Quality Control</span>
+                        <span class="skill-tag">DMAIC</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-header">
+                    <div class="cert-icon">🛡️</div>
+                    <h3 class="cert-name">OSHA 30-Hour General Industry</h3>
+                    <p class="cert-issuer">Occupational Safety & Health Administration</p>
+                </div>
+                <div class="cert-body">
+                    <span class="cert-date">Earned: 2021</span>
+                    <p class="cert-description">
+                        Comprehensive safety training covering workplace hazards, safety regulations, and best 
+                        practices for maintaining a safe manufacturing environment.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Workplace Safety</span>
+                        <span class="skill-tag">Hazard Prevention</span>
+                        <span class="skill-tag">Compliance</span>
+                        <span class="skill-tag">Risk Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-header">
+                    <div class="cert-icon">👥</div>
+                    <h3 class="cert-name">Certified Production Supervisor</h3>
+                    <p class="cert-issuer">Manufacturing Skill Standards Council</p>
+                </div>
+                <div class="cert-body">
+                    <span class="cert-date">Earned: 2020</span>
+                    <p class="cert-description">
+                        Recognition of expertise in production supervision, team leadership, and operational 
+                        management within manufacturing settings.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Team Leadership</span>
+                        <span class="skill-tag">Operations Management</span>
+                        <span class="skill-tag">Scheduling</span>
+                        <span class="skill-tag">Performance Metrics</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-header">
+                    <div class="cert-icon">⚙️</div>
+                    <h3 class="cert-name">Forklift Operator Certification</h3>
+                    <p class="cert-issuer">Certified Safety Trainers</p>
+                </div>
+                <div class="cert-body">
+                    <span class="cert-date">Earned: 2016 | Renewed: 2023</span>
+                    <p class="cert-description">
+                        Licensed to operate various types of forklifts and material handling equipment safely 
+                        and efficiently in warehouse and production environments.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Equipment Operation</span>
+                        <span class="skill-tag">Load Management</span>
+                        <span class="skill-tag">Warehouse Safety</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-header">
+                    <div class="cert-icon">📊</div>
+                    <h3 class="cert-name">Manufacturing Operations Certificate</h3>
+                    <p class="cert-issuer">Society of Manufacturing Engineers</p>
+                </div>
+                <div class="cert-body">
+                    <span class="cert-date">Earned: 2019</span>
+                    <p class="cert-description">
+                        Comprehensive training in manufacturing principles, production planning, inventory 
+                        management, and quality systems.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Production Planning</span>
+                        <span class="skill-tag">Inventory Control</span>
+                        <span class="skill-tag">Quality Systems</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-header">
+                    <div class="cert-icon">💻</div>
+                    <h3 class="cert-name">ERP Systems Training</h3>
+                    <p class="cert-issuer">SAP Certified</p>
+                </div>
+                <div class="cert-body">
+                    <span class="cert-date">Earned: 2021</span>
+                    <p class="cert-description">
+                        Proficiency in Enterprise Resource Planning software for managing production, inventory, 
+                        scheduling, and reporting in manufacturing operations.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">SAP</span>
+                        <span class="skill-tag">Data Management</span>
+                        <span class="skill-tag">Reporting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <h2 class="section-title">Education</h2>
+        
+        <div class="education-card">
+            <h3 class="education-degree">Associate Degree in Industrial Technology</h3>
+            <p class="education-school">Community College of Applied Sciences</p>
+            <p class="education-year">Graduated: 2015</p>
+        </div>
+
+        <div class="education-card">
+            <h3 class="education-degree">High School Diploma</h3>
+            <p class="education-school">Lincoln High School</p>
+            <p class="education-year">Graduated: 2013</p>
+        </div>
+
+        <footer>
+            <p>© 2026 Sarah Smith. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

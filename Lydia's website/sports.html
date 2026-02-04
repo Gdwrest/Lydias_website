@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports & Athletics - Digital Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Commissioner:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --deep-teal: #1A4D4D;
+            --terracotta: #D67C5C;
+            --sage: #8FA89E;
+            --charcoal: #2C2C2C;
+            --gold: #C9A961;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        nav {
+            background: var(--deep-teal);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--terracotta);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--terracotta);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--terracotta);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            opacity: 0.85;
+        }
+
+        /* Sports Grid */
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .sport-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .sport-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .sport-header {
+            background: linear-gradient(135deg, var(--terracotta), var(--gold));
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sport-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .sport-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .sport-body {
+            padding: 2.5rem;
+        }
+
+        .sport-level {
+            display: inline-block;
+            background: var(--sage);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sport-description {
+            color: var(--charcoal);
+            opacity: 0.85;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .sport-achievements {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .sport-achievements li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--charcoal);
+            opacity: 0.85;
+        }
+
+        .sport-achievements li::before {
+            content: '🏆';
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Values Section */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--deep-teal);
+            margin: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--terracotta);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: scale(1.05);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .value-description {
+            color: var(--charcoal);
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: white;
+            padding: 4rem 3rem;
+            border-radius: 16px;
+            margin: 4rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--terracotta);
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--deep-teal);
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            color: var(--terracotta);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--charcoal);
+            opacity: 0.6;
+            font-size: 0.95rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--deep-teal);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .sports-grid,
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-section {
+                padding: 3rem 2rem;
+            }
+
+            .quote-text {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Your Sister's Name</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="experience.html">Work Experience</a></li>
+                <li><a href="bulldog.html">Bulldog Manufacturing</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="sports.html" class="active">Sports</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Sports & Athletics</h1>
+            <p class="page-subtitle">Passion, Dedication & Team Spirit</p>
+            <p class="intro-text">
+                Athletics has always been a core part of who I am. The discipline, teamwork, and perseverance 
+                I've developed through sports directly translate to my professional success. Whether on the field 
+                or in the workplace, I bring the same competitive spirit and commitment to excellence.
+            </p>
+        </div>
+
+        <!-- Sports Cards -->
+        <div class="sports-grid">
+            <div class="sport-card">
+                <div class="sport-header">
+                    <div class="sport-icon">⚽</div>
+                    <h3 class="sport-name">Soccer</h3>
+                </div>
+                <div class="sport-body">
+                    <span class="sport-level">Competitive Level</span>
+                    <p class="sport-description">
+                        Playing soccer since age 6, I developed as a midfielder known for strategic play and 
+                        leadership. Soccer taught me the importance of teamwork, communication, and thinking 
+                        several moves ahead.
+                    </p>
+                    <ul class="sport-achievements">
+                        <li>Team Captain - High School Varsity (2011-2013)</li>
+                        <li>Regional Tournament Champions (2012)</li>
+                        <li>All-Conference Selection (2012, 2013)</li>
+                        <li>Currently play in local adult league</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sport-card">
+                <div class="sport-header">
+                    <div class="sport-icon">🏃‍♀️</div>
+                    <h3 class="sport-name">Track & Field</h3>
+                </div>
+                <div class="sport-body">
+                    <span class="sport-level">Varsity Athlete</span>
+                    <p class="sport-description">
+                        Competed in sprinting events and relays throughout high school. Track & field instilled 
+                        in me the value of individual accountability while contributing to team success.
+                    </p>
+                    <ul class="sport-achievements">
+                        <li>400m and 800m specialist</li>
+                        <li>4x400m relay team - State qualifiers</li>
+                        <li>School record holder - 4x400m relay (2013)</li>
+                        <li>Three-year varsity letter winner</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sport-card">
+                <div class="sport-header">
+                    <div class="sport-icon">🏋️‍♀️</div>
+                    <h3 class="sport-name">CrossFit</h3>
+                </div>
+                <div class="sport-body">
+                    <span class="sport-level">Active Participant</span>
+                    <p class="sport-description">
+                        Embraced CrossFit training as a way to maintain fitness and challenge myself mentally 
+                        and physically. The constantly varied workouts keep me engaged and motivated.
+                    </p>
+                    <ul class="sport-achievements">
+                        <li>Member since 2018</li>
+                        <li>Competed in local CrossFit competitions</li>
+                        <li>Maintains 5-day per week training schedule</li>
+                        <li>Achieved personal bests in multiple lifts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sport-card">
+                <div class="sport-header">
+                    <div class="sport-icon">🏐</div>
+                    <h3 class="sport-name">Volleyball</h3>
+                </div>
+                <div class="sport-body">
+                    <span class="sport-level">Recreational League</span>
+                    <p class="sport-description">
+                        Play in a recreational volleyball league as a social outlet and to stay active. 
+                        The fast-paced nature of volleyball keeps reflexes sharp and provides great cardio.
+                    </p>
+                    <ul class="sport-achievements">
+                        <li>Sand and indoor volleyball experience</li>
+                        <li>League member since 2019</li>
+                        <li>Team finished 2nd place (Summer 2024)</li>
+                        <li>Known for strong defense and setting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values from Sports -->
+        <h2 class="section-title">Values Learned Through Athletics</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">💪</div>
+                <h3 class="value-title">Discipline</h3>
+                <p class="value-description">
+                    Consistent training and practice taught me the importance of showing up every day and 
+                    putting in the work, even when motivation is low.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3 class="value-title">Teamwork</h3>
+                <p class="value-description">
+                    Understanding that individual success is meaningless without team success, and that 
+                    supporting teammates makes everyone stronger.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🎯</div>
+                <h3 class="value-title">Goal Setting</h3>
+                <p class="value-description">
+                    Setting ambitious but achievable goals, creating action plans, and celebrating milestones 
+                    along the journey to success.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🔄</div>
+                <h3 class="value-title">Resilience</h3>
+                <p class="value-description">
+                    Learning to bounce back from losses, injuries, and setbacks with a positive attitude 
+                    and renewed determination.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">⚡</div>
+                <h3 class="value-title">Competitive Spirit</h3>
+                <p class="value-description">
+                    Channeling healthy competition to drive excellence while maintaining respect for 
+                    opponents and sportsmanship.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">⏰</div>
+                <h3 class="value-title">Time Management</h3>
+                <p class="value-description">
+                    Balancing training schedules, competitions, work, and personal life taught me to 
+                    prioritize effectively and manage time wisely.
+                </p>
+            </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="quote-section">
+            <p class="quote-text">
+                "The principles that made me successful in sports—discipline, teamwork, and perseverance—are 
+                the same principles that drive my success in the workplace every single day."
+            </p>
+            <p class="quote-author">— Sarah Smith</p>
+        </div>
+
+        <footer>
+            <p>© 2026 Sarah Smith. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
