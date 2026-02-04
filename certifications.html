@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certifications - Digital Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Commissioner:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Certifications & Awards - Digital Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #FAF7F2;
-            --deep-teal: #1A4D4D;
-            --terracotta: #D67C5C;
-            --sage: #8FA89E;
-            --charcoal: #2C2C2C;
-            --gold: #C9A961;
+            --ink: #0f1a2b;
+            --ink-soft: #2a3342;
+            --cream: #f8f4ee;
+            --sand: #e9dfd2;
+            --coral: #d1695b;
+            --sage: #7b8f86;
+            --gold: #c4a46b;
+            --deep: #13243a;
+            --white: #ffffff;
+            --shadow: 0 20px 60px rgba(17, 24, 39, 0.12);
+            --radius-lg: 24px;
+            --radius-md: 16px;
         }
 
         * {
@@ -22,19 +28,43 @@
         }
 
         body {
-            font-family: 'Commissioner', sans-serif;
-            background: var(--cream);
-            color: var(--charcoal);
+            font-family: 'Space Grotesk', sans-serif;
+            background: radial-gradient(1200px 600px at 10% 10%, rgba(123, 143, 134, 0.18), transparent 60%),
+                        radial-gradient(1000px 500px at 90% 20%, rgba(209, 105, 91, 0.18), transparent 55%),
+                        var(--cream);
+            color: var(--ink-soft);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: 10px;
+            background: var(--deep);
+            color: var(--white);
+            padding: 0.6rem 1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            z-index: 999;
+        }
+
+        .skip-link:focus {
+            left: 20px;
         }
 
         nav {
-            background: var(--deep-teal);
+            background: rgba(19, 36, 58, 0.94);
+            backdrop-filter: blur(10px);
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         .nav-container {
@@ -44,20 +74,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
 
         .nav-logo {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Fraunces', serif;
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--cream);
             text-decoration: none;
+            letter-spacing: 0.5px;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
+            align-items: center;
         }
 
         .nav-menu a {
@@ -66,21 +99,38 @@
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
+            padding-bottom: 0.2rem;
         }
 
         .nav-menu a:hover,
         .nav-menu a.active {
-            color: var(--terracotta);
+            color: var(--gold);
         }
 
         .nav-menu a.active::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -6px;
             left: 0;
             right: 0;
             height: 2px;
-            background: var(--terracotta);
+            background: var(--gold);
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--deep);
+            text-decoration: none;
+            padding: 0.55rem 1.1rem;
+            border-radius: 999px;
+            font-weight: 600;
+            box-shadow: 0 6px 16px rgba(196, 164, 107, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(196, 164, 107, 0.45);
         }
 
         .menu-toggle {
@@ -88,195 +138,196 @@
             background: none;
             border: none;
             color: var(--cream);
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             cursor: pointer;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 3.5rem 2rem 4.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .page-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            animation: fadeInDown 0.8s ease-out;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(123, 143, 134, 0.16);
+            color: var(--deep);
+            font-weight: 600;
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-bottom: 1.2rem;
         }
 
         .page-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            color: var(--deep-teal);
-            margin-bottom: 1rem;
+            font-family: 'Fraunces', serif;
+            font-size: 3.2rem;
+            color: var(--deep);
+            margin-bottom: 0.8rem;
+            letter-spacing: -1px;
         }
 
         .page-subtitle {
-            font-size: 1.3rem;
-            color: var(--terracotta);
-            opacity: 0.9;
-        }
-
-        /* Certification Cards */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin: 3rem 0;
-        }
-
-        .cert-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .cert-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-        }
-
-        .cert-header {
-            background: linear-gradient(135deg, var(--deep-teal), var(--sage));
-            padding: 2.5rem 2rem;
-            text-align: center;
-            color: white;
-        }
-
-        .cert-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .cert-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.7rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-issuer {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .cert-body {
-            padding: 2rem;
-        }
-
-        .cert-date {
-            display: inline-block;
-            background: var(--cream);
-            color: var(--terracotta);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1.2rem;
+            color: var(--coral);
+            font-weight: 500;
             margin-bottom: 1.5rem;
         }
 
-        .cert-description {
-            color: var(--charcoal);
-            opacity: 0.85;
+        .intro {
+            font-size: 1.05rem;
+            color: var(--ink-soft);
+            opacity: 0.9;
             line-height: 1.8;
-            margin-bottom: 1.5rem;
         }
 
-        .cert-skills {
+        .header-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 18px 50px rgba(15, 26, 43, 0.12);
+            border: 1px solid rgba(19, 36, 58, 0.08);
+        }
+
+        .header-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.4rem;
+            color: var(--deep);
+            margin-bottom: 0.7rem;
+        }
+
+        .header-card p {
+            color: var(--ink-soft);
+            line-height: 1.7;
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 2.2rem;
+            color: var(--deep);
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--ink-soft);
+            opacity: 0.85;
+            margin-bottom: 2rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 1.8rem;
+            box-shadow: 0 14px 36px rgba(15, 26, 43, 0.08);
+            border: 1px solid rgba(19, 36, 58, 0.08);
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .info-card .label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(19, 36, 58, 0.06);
+            color: var(--deep);
+            font-weight: 600;
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+            width: fit-content;
+            font-size: 0.85rem;
+        }
+
+        .info-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.4rem;
+            color: var(--deep);
+        }
+
+        .info-card p {
+            color: var(--ink-soft);
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .tag-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.75rem;
+            gap: 0.6rem;
         }
 
-        .skill-tag {
-            background: var(--sage);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
+        .tag {
+            background: rgba(123, 143, 134, 0.18);
+            color: var(--deep);
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.85rem;
         }
 
-        /* Education Section */
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--deep-teal);
-            margin: 4rem 0 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--terracotta);
+        .education-list {
+            display: grid;
+            gap: 1.5rem;
         }
 
         .education-card {
-            background: white;
-            padding: 3rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin: 2rem 0;
-            border-left: 5px solid var(--terracotta);
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: 0 14px 36px rgba(15, 26, 43, 0.08);
+            border: 1px solid rgba(19, 36, 58, 0.08);
+            border-left: 5px solid var(--coral);
         }
 
         .education-degree {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--deep-teal);
-            margin-bottom: 0.5rem;
+            font-family: 'Fraunces', serif;
+            font-size: 1.6rem;
+            color: var(--deep);
+            margin-bottom: 0.4rem;
         }
 
         .education-school {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: var(--sage);
-            margin-bottom: 1rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
         }
 
         .education-year {
-            color: var(--terracotta);
+            color: var(--coral);
             font-weight: 600;
         }
 
         footer {
             text-align: center;
-            padding: 3rem 0;
-            color: var(--charcoal);
-            opacity: 0.6;
+            padding: 3rem 0 1rem;
+            color: var(--ink-soft);
+            opacity: 0.7;
             font-size: 0.95rem;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(0,0,0,0.1);
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        @media (max-width: 900px) {
+            .page-header {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -291,7 +342,7 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--deep-teal);
+                background: rgba(19, 36, 58, 0.98);
                 flex-direction: column;
                 padding: 1rem 0;
                 gap: 0;
@@ -303,185 +354,163 @@
 
             .nav-menu li {
                 padding: 1rem 2rem;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-cta {
+                display: none;
             }
 
             .page-title {
-                font-size: 2.5rem;
-            }
-
-            .cert-grid {
-                grid-template-columns: 1fr;
+                font-size: 2.4rem;
             }
         }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">Your Sister's Name</a>
+            <a href="index.html" class="nav-logo">Lydia Wrest</a>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="experience.html">Work Experience</a></li>
                 <li><a href="bulldog.html">Bulldog Manufacturing</a></li>
-                <li><a href="certifications.html" class="active">Certifications</a></li>
-                <li><a href="sports.html">Sports</a></li>
+                <li><a href="certifications.html" class="active">Certifications &amp; Awards</a></li>
+                <li><a href="mailto:lwrest26@aldenschools.org" class="nav-cta">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Certifications & Education</h1>
-            <p class="page-subtitle">Continuous Learning & Professional Development</p>
-        </div>
+    <main id="main" class="container">
+        <section class="page-header">
+            <div>
+                <span class="eyebrow">Achievements</span>
+                <h1 class="page-title">Certifications & Awards</h1>
+                <p class="page-subtitle">Certifications, awards, and athletics in one place.</p>
+                <p class="intro">
+                    This section highlights professional credentials, recognitions, and sports accomplishments that reflect discipline, leadership, and continuous growth.
+                </p>
+            </div>
+            <div class="header-card">
+                <h3>What You’ll Find</h3>
+                <p>
+                    Certifications, awards, and athletics details are organized below so you can see achievements at a glance. Update each card with the details you want to showcase.
+                </p>
+            </div>
+        </section>
 
-        <!-- Professional Certifications -->
-        <div class="cert-grid">
-            <div class="cert-card">
-                <div class="cert-header">
-                    <div class="cert-icon">🏭</div>
-                    <h3 class="cert-name">Lean Six Sigma Green Belt</h3>
-                    <p class="cert-issuer">American Society for Quality (ASQ)</p>
-                </div>
-                <div class="cert-body">
-                    <span class="cert-date">Earned: 2022</span>
-                    <p class="cert-description">
-                        Advanced certification in process improvement methodologies, focusing on reducing waste, 
-                        improving quality, and increasing operational efficiency in manufacturing environments.
-                    </p>
-                    <div class="cert-skills">
-                        <span class="skill-tag">Process Improvement</span>
-                        <span class="skill-tag">Data Analysis</span>
-                        <span class="skill-tag">Quality Control</span>
-                        <span class="skill-tag">DMAIC</span>
+        <section>
+            <h2 class="section-title">Certifications</h2>
+            <p class="section-subtitle">Professional training, certifications, and credentials.</p>
+            <div class="card-grid">
+                <div class="info-card">
+                    <span class="label">Certification</span>
+                    <h3>OSHA 10-Hour Course</h3>
+                    <p>Completed OSHA 10-hour safety training focused on workplace hazards, prevention, and safe practices.</p>
+                    <div class="tag-row">
+                        <span class="tag">Workplace Safety</span>
+                        <span class="tag">Hazard Awareness</span>
+                        <span class="tag">Compliance</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="cert-card">
-                <div class="cert-header">
-                    <div class="cert-icon">🛡️</div>
-                    <h3 class="cert-name">OSHA 30-Hour General Industry</h3>
-                    <p class="cert-issuer">Occupational Safety & Health Administration</p>
+        <section>
+            <h2 class="section-title">Awards & Recognition</h2>
+            <p class="section-subtitle">Honors, awards, and recognitions.</p>
+            <div class="card-grid">
+                <div class="info-card">
+                    <span class="label">Scholarship</span>
+                    <h3>RIT Women in STEM Scholarship</h3>
+                    <p>Awarded $95,000 over four years in recognition of achievement and potential in STEM.</p>
+                    <div class="tag-row">
+                        <span class="tag">STEM</span>
+                        <span class="tag">Academic</span>
+                        <span class="tag">Merit</span>
+                    </div>
                 </div>
-                <div class="cert-body">
-                    <span class="cert-date">Earned: 2021</span>
-                    <p class="cert-description">
-                        Comprehensive safety training covering workplace hazards, safety regulations, and best 
-                        practices for maintaining a safe manufacturing environment.
-                    </p>
-                    <div class="cert-skills">
-                        <span class="skill-tag">Workplace Safety</span>
-                        <span class="skill-tag">Hazard Prevention</span>
-                        <span class="skill-tag">Compliance</span>
-                        <span class="skill-tag">Risk Management</span>
+                <div class="info-card">
+                    <span class="label">Scholarship</span>
+                    <h3>UB Pride of New York Scholarship</h3>
+                    <p>Awarded $20,000 over the next four years for academic achievement and leadership.</p>
+                    <div class="tag-row">
+                        <span class="tag">Academic</span>
+                        <span class="tag">Leadership</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <span class="label">Award</span>
+                    <h3>Scholar Athlete (All 4 Years)</h3>
+                    <p>Recognized as a scholar athlete throughout all four years of high school.</p>
+                    <div class="tag-row">
+                        <span class="tag">Athletics</span>
+                        <span class="tag">Academics</span>
+                        <span class="tag">Consistency</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <span class="label">Honor</span>
+                    <h3>High Honor Roll</h3>
+                    <p>Consistently achieved high honor roll status for academic excellence.</p>
+                    <div class="tag-row">
+                        <span class="tag">Academic</span>
+                        <span class="tag">Excellence</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="cert-card">
-                <div class="cert-header">
-                    <div class="cert-icon">👥</div>
-                    <h3 class="cert-name">Certified Production Supervisor</h3>
-                    <p class="cert-issuer">Manufacturing Skill Standards Council</p>
+        <section>
+            <h2 class="section-title">Athletics</h2>
+            <p class="section-subtitle">Sports, leadership, and team achievements.</p>
+            <div class="card-grid">
+                <div class="info-card">
+                    <span class="label">Sport</span>
+                    <h3>Varsity Soccer</h3>
+                    <p>Replace this with team, position, years, and any highlights or awards.</p>
+                    <div class="tag-row">
+                        <span class="tag">Teamwork</span>
+                        <span class="tag">Discipline</span>
+                    </div>
                 </div>
-                <div class="cert-body">
-                    <span class="cert-date">Earned: 2020</span>
-                    <p class="cert-description">
-                        Recognition of expertise in production supervision, team leadership, and operational 
-                        management within manufacturing settings.
-                    </p>
-                    <div class="cert-skills">
-                        <span class="skill-tag">Team Leadership</span>
-                        <span class="skill-tag">Operations Management</span>
-                        <span class="skill-tag">Scheduling</span>
-                        <span class="skill-tag">Performance Metrics</span>
+                <div class="info-card">
+                    <span class="label">Sport</span>
+                    <h3>Leadership Role</h3>
+                    <p>Replace this with captainship, leadership, or special achievements in athletics.</p>
+                    <div class="tag-row">
+                        <span class="tag">Leadership</span>
+                        <span class="tag">Consistency</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="cert-card">
-                <div class="cert-header">
-                    <div class="cert-icon">⚙️</div>
-                    <h3 class="cert-name">Forklift Operator Certification</h3>
-                    <p class="cert-issuer">Certified Safety Trainers</p>
+        <section>
+            <h2 class="section-title">Education</h2>
+            <p class="section-subtitle">Academic milestones.</p>
+            <div class="education-list">
+                <div class="education-card">
+                    <h3 class="education-degree">Associate Degree in Industrial Technology</h3>
+                    <p class="education-school">Community College of Applied Sciences</p>
+                    <p class="education-year">Graduated: 2015</p>
                 </div>
-                <div class="cert-body">
-                    <span class="cert-date">Earned: 2016 | Renewed: 2023</span>
-                    <p class="cert-description">
-                        Licensed to operate various types of forklifts and material handling equipment safely 
-                        and efficiently in warehouse and production environments.
-                    </p>
-                    <div class="cert-skills">
-                        <span class="skill-tag">Equipment Operation</span>
-                        <span class="skill-tag">Load Management</span>
-                        <span class="skill-tag">Warehouse Safety</span>
-                    </div>
+
+                <div class="education-card">
+                    <h3 class="education-degree">High School Diploma</h3>
+                    <p class="education-school">Lincoln High School</p>
+                    <p class="education-year">Graduated: 2013</p>
                 </div>
             </div>
-
-            <div class="cert-card">
-                <div class="cert-header">
-                    <div class="cert-icon">📊</div>
-                    <h3 class="cert-name">Manufacturing Operations Certificate</h3>
-                    <p class="cert-issuer">Society of Manufacturing Engineers</p>
-                </div>
-                <div class="cert-body">
-                    <span class="cert-date">Earned: 2019</span>
-                    <p class="cert-description">
-                        Comprehensive training in manufacturing principles, production planning, inventory 
-                        management, and quality systems.
-                    </p>
-                    <div class="cert-skills">
-                        <span class="skill-tag">Production Planning</span>
-                        <span class="skill-tag">Inventory Control</span>
-                        <span class="skill-tag">Quality Systems</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-header">
-                    <div class="cert-icon">💻</div>
-                    <h3 class="cert-name">ERP Systems Training</h3>
-                    <p class="cert-issuer">SAP Certified</p>
-                </div>
-                <div class="cert-body">
-                    <span class="cert-date">Earned: 2021</span>
-                    <p class="cert-description">
-                        Proficiency in Enterprise Resource Planning software for managing production, inventory, 
-                        scheduling, and reporting in manufacturing operations.
-                    </p>
-                    <div class="cert-skills">
-                        <span class="skill-tag">SAP</span>
-                        <span class="skill-tag">Data Management</span>
-                        <span class="skill-tag">Reporting</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Education -->
-        <h2 class="section-title">Education</h2>
-        
-        <div class="education-card">
-            <h3 class="education-degree">Associate Degree in Industrial Technology</h3>
-            <p class="education-school">Community College of Applied Sciences</p>
-            <p class="education-year">Graduated: 2015</p>
-        </div>
-
-        <div class="education-card">
-            <h3 class="education-degree">High School Diploma</h3>
-            <p class="education-school">Lincoln High School</p>
-            <p class="education-year">Graduated: 2013</p>
-        </div>
+        </section>
 
         <footer>
-            <p>© 2026 Sarah Smith. All rights reserved.</p>
+            <p>© 2026 Lydia Wrest. All rights reserved.</p>
         </footer>
-    </div>
+    </main>
 
     <script>
         function toggleMenu() {

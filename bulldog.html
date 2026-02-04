@@ -4,15 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bulldog Manufacturing - Digital Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Commissioner:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #FAF7F2;
-            --deep-teal: #1A4D4D;
-            --terracotta: #D67C5C;
-            --sage: #8FA89E;
-            --charcoal: #2C2C2C;
-            --gold: #C9A961;
+            --ink: #0f1a2b;
+            --ink-soft: #2a3342;
+            --cream: #f8f4ee;
+            --sand: #e9dfd2;
+            --coral: #d1695b;
+            --sage: #7b8f86;
+            --gold: #c4a46b;
+            --deep: #13243a;
+            --white: #ffffff;
+            --shadow: 0 20px 60px rgba(17, 24, 39, 0.12);
+            --radius-lg: 24px;
+            --radius-md: 16px;
         }
 
         * {
@@ -22,19 +28,43 @@
         }
 
         body {
-            font-family: 'Commissioner', sans-serif;
-            background: var(--cream);
-            color: var(--charcoal);
+            font-family: 'Space Grotesk', sans-serif;
+            background: radial-gradient(1200px 600px at 10% 10%, rgba(123, 143, 134, 0.18), transparent 60%),
+                        radial-gradient(1000px 500px at 90% 20%, rgba(209, 105, 91, 0.18), transparent 55%),
+                        var(--cream);
+            color: var(--ink-soft);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: 10px;
+            background: var(--deep);
+            color: var(--white);
+            padding: 0.6rem 1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            z-index: 999;
+        }
+
+        .skip-link:focus {
+            left: 20px;
         }
 
         nav {
-            background: var(--deep-teal);
+            background: rgba(19, 36, 58, 0.94);
+            backdrop-filter: blur(10px);
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         .nav-container {
@@ -44,20 +74,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
 
         .nav-logo {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Fraunces', serif;
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--cream);
             text-decoration: none;
+            letter-spacing: 0.5px;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
+            align-items: center;
         }
 
         .nav-menu a {
@@ -66,21 +99,38 @@
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
+            padding-bottom: 0.2rem;
         }
 
         .nav-menu a:hover,
         .nav-menu a.active {
-            color: var(--terracotta);
+            color: var(--gold);
         }
 
         .nav-menu a.active::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -6px;
             left: 0;
             right: 0;
             height: 2px;
-            background: var(--terracotta);
+            background: var(--gold);
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--deep);
+            text-decoration: none;
+            padding: 0.55rem 1.1rem;
+            border-radius: 999px;
+            font-weight: 600;
+            box-shadow: 0 6px 16px rgba(196, 164, 107, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(196, 164, 107, 0.45);
         }
 
         .menu-toggle {
@@ -88,199 +138,199 @@
             background: none;
             border: none;
             color: var(--cream);
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             cursor: pointer;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 3.5rem 2rem 4.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .page-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            animation: fadeInDown 0.8s ease-out;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(123, 143, 134, 0.16);
+            color: var(--deep);
+            font-weight: 600;
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-bottom: 1.2rem;
         }
 
         .page-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            color: var(--deep-teal);
-            margin-bottom: 1rem;
+            font-family: 'Fraunces', serif;
+            font-size: 3.2rem;
+            color: var(--deep);
+            margin-bottom: 0.8rem;
+            letter-spacing: -1px;
         }
 
         .page-subtitle {
-            font-size: 1.3rem;
-            color: var(--terracotta);
-            opacity: 0.9;
-            margin-bottom: 2rem;
-        }
-
-        .intro-text {
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            font-size: 1.15rem;
-            line-height: 1.9;
-            opacity: 0.85;
-        }
-
-        /* Stats Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-            border-top: 5px solid var(--sage);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--terracotta);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            color: var(--charcoal);
-            opacity: 0.8;
-        }
-
-        /* Achievements Section */
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--deep-teal);
-            margin: 4rem 0 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--terracotta);
-        }
-
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .achievement-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border-left: 5px solid var(--terracotta);
-            transition: all 0.3s ease;
-        }
-
-        .achievement-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-        }
-
-        .achievement-icon {
-            font-size: 2.5rem;
+            font-size: 1.2rem;
+            color: var(--coral);
+            font-weight: 500;
             margin-bottom: 1.5rem;
         }
 
-        .achievement-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--deep-teal);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .achievement-description {
-            color: var(--charcoal);
-            opacity: 0.85;
+        .intro {
+            font-size: 1.05rem;
+            color: var(--ink-soft);
+            opacity: 0.9;
             line-height: 1.8;
         }
 
-        /* Responsibilities */
-        .responsibilities {
-            background: white;
-            padding: 3rem;
-            border-radius: 16px;
-            margin: 3rem 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        .header-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 18px 50px rgba(15, 26, 43, 0.12);
+            border: 1px solid rgba(19, 36, 58, 0.08);
         }
 
-        .responsibilities h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--deep-teal);
+        .header-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.4rem;
+            color: var(--deep);
+            margin-bottom: 0.7rem;
+        }
+
+        .header-card p {
+            color: var(--ink-soft);
+            line-height: 1.7;
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 2.2rem;
+            color: var(--deep);
+            margin: 2.8rem 0 1.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--ink-soft);
+            opacity: 0.85;
             margin-bottom: 2rem;
         }
 
-        .responsibilities-list {
-            list-style: none;
+        .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .card-grid.four-up {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 1.8rem;
+            box-shadow: 0 14px 36px rgba(15, 26, 43, 0.08);
+            border: 1px solid rgba(19, 36, 58, 0.08);
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .info-card .label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(19, 36, 58, 0.06);
+            color: var(--deep);
+            font-weight: 600;
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+            width: fit-content;
+            font-size: 0.85rem;
+        }
+
+        .info-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.4rem;
+            color: var(--deep);
+        }
+
+        .info-card p {
+            color: var(--ink-soft);
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tag {
+            background: rgba(123, 143, 134, 0.18);
+            color: var(--deep);
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .process {
+            background: var(--white);
+            padding: 2.4rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 18px 50px rgba(15, 26, 43, 0.12);
+            border: 1px solid rgba(19, 36, 58, 0.08);
+            display: grid;
             gap: 1.5rem;
         }
 
-        .responsibilities-list li {
-            padding: 1.5rem;
-            background: var(--cream);
-            border-radius: 12px;
-            padding-left: 3rem;
-            position: relative;
+        .process-step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            align-items: start;
         }
 
-        .responsibilities-list li::before {
-            content: '▸';
-            position: absolute;
-            left: 1.5rem;
-            color: var(--terracotta);
-            font-size: 1.3rem;
-            font-weight: bold;
+        .step-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(209, 105, 91, 0.15);
+            color: var(--coral);
+            font-weight: 700;
+            display: grid;
+            place-items: center;
         }
 
         footer {
             text-align: center;
-            padding: 3rem 0;
-            color: var(--charcoal);
-            opacity: 0.6;
+            padding: 3rem 0 1rem;
+            color: var(--ink-soft);
+            opacity: 0.7;
             font-size: 0.95rem;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(0,0,0,0.1);
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
+        @media (max-width: 900px) {
+            .page-header {
+                grid-template-columns: 1fr;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .card-grid.four-up {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
@@ -295,7 +345,7 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--deep-teal);
+                background: rgba(19, 36, 58, 0.98);
                 flex-direction: column;
                 padding: 1rem 0;
                 gap: 0;
@@ -307,146 +357,159 @@
 
             .nav-menu li {
                 padding: 1rem 2rem;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-cta {
+                display: none;
             }
 
             .page-title {
-                font-size: 2.5rem;
+                font-size: 2.4rem;
             }
 
-            .stats-grid,
-            .achievements-grid,
-            .responsibilities-list {
+            .card-grid.four-up {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">Your Sister's Name</a>
+            <a href="index.html" class="nav-logo">Lydia Wrest</a>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="experience.html">Work Experience</a></li>
                 <li><a href="bulldog.html" class="active">Bulldog Manufacturing</a></li>
-                <li><a href="certifications.html">Certifications</a></li>
-                <li><a href="sports.html">Sports</a></li>
+                <li><a href="certifications.html">Certifications &amp; Awards</a></li>
+                <li><a href="mailto:lwrest26@aldenschools.org" class="nav-cta">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Bulldog Manufacturing</h1>
-            <p class="page-subtitle">8+ Years of Excellence | 2016 - Present</p>
-            <p class="intro-text">
-                My journey at Bulldog Manufacturing began in 2016 as a Production Associate. Through dedication, 
-                continuous learning, and a commitment to excellence, I've advanced through multiple roles to my 
-                current position as Operations Manager. This progression reflects my deep understanding of 
-                manufacturing operations and proven leadership capabilities.
-            </p>
-        </div>
-
-        <!-- Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">8+</div>
-                <div class="stat-label">Years with Company</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">35%</div>
-                <div class="stat-label">Efficiency Increase</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">25+</div>
-                <div class="stat-label">Team Members Led</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">50%</div>
-                <div class="stat-label">Safety Improvement</div>
-            </div>
-        </div>
-
-        <!-- Key Achievements -->
-        <h2 class="section-title">Key Achievements</h2>
-        <div class="achievements-grid">
-            <div class="achievement-card">
-                <div class="achievement-icon">🏆</div>
-                <h3 class="achievement-title">Process Optimization</h3>
-                <p class="achievement-description">
-                    Led comprehensive process improvement initiative that increased production efficiency by 35% 
-                    while maintaining quality standards. Implemented lean manufacturing principles across all production lines.
+    <main id="main" class="container">
+        <section class="page-header">
+            <div>
+                <span class="eyebrow">Student Manufacturing</span>
+                <h1 class="page-title">Bulldog Manufacturing</h1>
+                <p class="page-subtitle">New York's leading student manufacturing company.</p>
+                <p class="intro">
+                    I serve as the lead of the Design and Consumer Products department, guiding projects from concept to production while collaborating with teammates across the company.
                 </p>
             </div>
-
-            <div class="achievement-card">
-                <div class="achievement-icon">📈</div>
-                <h3 class="achievement-title">Career Advancement</h3>
-                <p class="achievement-description">
-                    Promoted three times within the organization: from Production Associate to Production Supervisor 
-                    to Operations Manager, demonstrating consistent performance and leadership growth.
+            <div class="header-card">
+                <h3>Role Snapshot</h3>
+                <p>
+                    I use Adobe Illustrator daily to create custom designs, communicate with customers for approvals, and coordinate laser engraving on selected products. I also assign projects to teammates within my department.
                 </p>
             </div>
+        </section>
 
-            <div class="achievement-card">
-                <div class="achievement-icon">🛡️</div>
-                <h3 class="achievement-title">Safety Excellence</h3>
-                <p class="achievement-description">
-                    Championed new safety protocols and training programs that reduced workplace incidents by 50%, 
-                    creating a safer environment for all team members.
-                </p>
+        <section>
+            <h2 class="section-title">What I Do</h2>
+            <p class="section-subtitle">Design leadership, client collaboration, and production execution.</p>
+            <div class="card-grid four-up">
+                <div class="info-card">
+                    <span class="label">Leadership</span>
+                    <h3>Department Lead</h3>
+                    <p>Lead the Design and Consumer Products department, coordinating workloads and supporting team success.</p>
+                    <div class="tag-row">
+                        <span class="tag">Project Assignment</span>
+                        <span class="tag">Teamwork</span>
+                        <span class="tag">Quality</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <span class="label">Design</span>
+                    <h3>Adobe Illustrator</h3>
+                    <p>Create client-ready designs daily and prepare files for production and engraving.</p>
+                    <div class="tag-row">
+                        <span class="tag">Illustrator</span>
+                        <span class="tag">Client Design</span>
+                        <span class="tag">Production Prep</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <span class="label">Customer Care</span>
+                    <h3>Approval & Communication</h3>
+                    <p>Send design proofs to customers, gather approvals, and keep projects moving on schedule.</p>
+                    <div class="tag-row">
+                        <span class="tag">Email Communication</span>
+                        <span class="tag">Customer Service</span>
+                        <span class="tag">Deadlines</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <span class="label">Production</span>
+                    <h3>Laser Engraving</h3>
+                    <p>Engrave finalized designs on the selected products, ensuring precision and quality.</p>
+                    <div class="tag-row">
+                        <span class="tag">Laser Engraving</span>
+                        <span class="tag">Detail Oriented</span>
+                        <span class="tag">Quality Control</span>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="achievement-card">
-                <div class="achievement-icon">👥</div>
-                <h3 class="achievement-title">Team Leadership</h3>
-                <p class="achievement-description">
-                    Successfully manage and mentor a diverse team of 25+ employees across multiple shifts, 
-                    fostering a culture of collaboration and continuous improvement.
-                </p>
+        <section>
+            <h2 class="section-title">Workflow</h2>
+            <p class="section-subtitle">How projects move from request to finished product.</p>
+            <div class="process">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Design Intake</h3>
+                        <p>Work with customers to understand needs, product choices, and design goals.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>Create & Review</h3>
+                        <p>Design in Adobe Illustrator, send proofs, and revise until approval is received.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Engrave & Deliver</h3>
+                        <p>Laser engrave the approved design and coordinate delivery with the team.</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="achievement-card">
-                <div class="achievement-icon">⏰</div>
-                <h3 class="achievement-title">On-Time Delivery</h3>
-                <p class="achievement-description">
-                    Maintained 98% on-time delivery rate as Production Supervisor, ensuring customer satisfaction 
-                    and strengthening client relationships.
-                </p>
+        <section>
+            <h2 class="section-title">About Bulldog Manufacturing</h2>
+            <p class="section-subtitle">Real-world experience across multiple student-led departments.</p>
+            <div class="card-grid">
+                <div class="info-card">
+                    <span class="label">Company</span>
+                    <h3>Student-Led Operations</h3>
+                    <p>Bulldog Manufacturing gives students hands-on experience with customers, production, and managing supplies.</p>
+                </div>
+                <div class="info-card">
+                    <span class="label">Departments</span>
+                    <h3>Cross-Functional Teams</h3>
+                    <p>Students work in multiple departments, gaining experience in design, production, and customer communication.</p>
+                </div>
+                <div class="info-card">
+                    <span class="label">Impact</span>
+                    <h3>New York Leader</h3>
+                    <p>Recognized as New York's leading student manufacturing company.</p>
+                </div>
             </div>
-
-            <div class="achievement-card">
-                <div class="achievement-icon">♻️</div>
-                <h3 class="achievement-title">Waste Reduction</h3>
-                <p class="achievement-description">
-                    Implemented quality control improvements that significantly reduced material waste and 
-                    improved overall product quality metrics.
-                </p>
-            </div>
-        </div>
-
-        <!-- Current Responsibilities -->
-        <div class="responsibilities">
-            <h3>Current Responsibilities as Operations Manager</h3>
-            <ul class="responsibilities-list">
-                <li>Oversee daily manufacturing operations and production scheduling</li>
-                <li>Manage cross-functional teams including production, quality, and maintenance</li>
-                <li>Develop and implement process improvement initiatives</li>
-                <li>Monitor key performance indicators and production metrics</li>
-                <li>Ensure compliance with safety regulations and quality standards</li>
-                <li>Coordinate with procurement for materials and inventory management</li>
-                <li>Lead training and development programs for production staff</li>
-                <li>Collaborate with leadership on strategic planning and budgeting</li>
-                <li>Drive continuous improvement culture across all departments</li>
-            </ul>
-        </div>
+        </section>
 
         <footer>
-            <p>© 2026 Sarah Smith. All rights reserved.</p>
+            <p>© 2026 Lydia Wrest. All rights reserved.</p>
         </footer>
-    </div>
+    </main>
 
     <script>
         function toggleMenu() {
