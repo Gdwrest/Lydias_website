@@ -234,6 +234,16 @@
             gap: 1.8rem;
         }
 
+        .card-grid.four-up {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .card-grid.single {
+            grid-template-columns: minmax(0, 1fr);
+            max-width: 100%;
+            margin: 0;
+        }
+
         .info-card {
             background: var(--white);
             border-radius: var(--radius-md);
@@ -329,6 +339,14 @@
             .page-header {
                 grid-template-columns: 1fr;
             }
+
+            .card-grid.four-up {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .card-grid.single {
+                max-width: 100%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -364,6 +382,10 @@
             .page-title {
                 font-size: 2.4rem;
             }
+
+            .card-grid.four-up {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -379,7 +401,7 @@
                 <li><a href="experience.html">Work Experience</a></li>
                 <li><a href="bulldog.html">Bulldog Manufacturing</a></li>
                 <li><a href="certifications.html" class="active">Certifications &amp; Awards</a></li>
-                <li><a href="mailto:lwrest26@aldenschools.org" class="nav-cta">Contact</a></li>
+                <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -405,7 +427,7 @@
         <section>
             <h2 class="section-title">Certifications</h2>
             <p class="section-subtitle">Professional training, certifications, and credentials.</p>
-            <div class="card-grid">
+            <div class="card-grid single">
                 <div class="info-card">
                     <span class="label">Certification</span>
                     <h3>OSHA 10-Hour Course</h3>
@@ -422,7 +444,7 @@
         <section>
             <h2 class="section-title">Awards & Recognition</h2>
             <p class="section-subtitle">Honors, awards, and recognitions.</p>
-            <div class="card-grid">
+            <div class="card-grid four-up">
                 <div class="info-card">
                     <span class="label">Scholarship</span>
                     <h3>RIT Women in STEM Scholarship</h3>
@@ -494,15 +516,14 @@
             <p class="section-subtitle">Academic milestones.</p>
             <div class="education-list">
                 <div class="education-card">
-                    <h3 class="education-degree">Associate Degree in Industrial Technology</h3>
-                    <p class="education-school">Community College of Applied Sciences</p>
-                    <p class="education-year">Graduated: 2015</p>
+                    <h3 class="education-degree">Architecture B.S.</h3>
+                    <p class="education-school">University at Buffalo</p>
+                    <p class="education-year">2026 - 2030</p>
                 </div>
-
                 <div class="education-card">
                     <h3 class="education-degree">High School Diploma</h3>
-                    <p class="education-school">Lincoln High School</p>
-                    <p class="education-year">Graduated: 2013</p>
+                    <p class="education-school">Alden High School</p>
+                    <p class="education-year">Graduating: 2026</p>
                 </div>
             </div>
         </section>
